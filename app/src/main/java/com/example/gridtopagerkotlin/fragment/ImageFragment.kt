@@ -2,17 +2,16 @@ package com.example.gridtopagerkotlin.fragment
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-
 import com.example.gridtopagerkotlin.R
 
 /**
@@ -29,11 +28,13 @@ class ImageFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_image, container, false)
 
-        // Just like we do when binding views at the grid, we set the transition name to be the string
-        // value of the image res.
         val arguments : Bundle? = arguments
         if (arguments != null){
             @DrawableRes val imageRes : Int = arguments.getInt(KEY_IMAGE_RES)
+
+            // Just like we do when binding views at the grid, we set the transition name to be the string
+            // value of the image res.
+            view.findViewById<View>(R.id.image).transitionName = imageRes.toString()
 
             // Load the image with Glide to prevent OOM error when the image drawables are very large.
             Glide.with(this)

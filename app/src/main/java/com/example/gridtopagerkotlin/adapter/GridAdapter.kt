@@ -71,18 +71,20 @@ class GridAdapter(fragment: Fragment) : RecyclerView.Adapter<GridAdapter.ImageVi
 
             // Exclude the clicked card from the exit transition (e.g. the card will disappear immediately
             // instead of fading out with the rest to prevent an overlapping animation of fade and move).: RequestManager
-            val transitionSet : TransitionSet = fragment.exitTransition as TransitionSet
-            transitionSet.excludeTarget(view, true)
-            val fragmentManager = fragment.fragmentManager
+            val transitionSet : TransitionSet? = fragment.exitTransition as TransitionSet?
+            if (transitionSet != null){
+                transitionSet.excludeTarget(view, true)
+                val fragmentManager = fragment.fragmentManager
 
-            if (view != null && fragmentManager != null){
-                val transitioningView : ImageView = view.findViewById(R.id.card_image)
-                fragmentManager.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .addSharedElement(transitioningView, transitioningView.transitionName)
-                    .replace(R.id.fragment_container, ImagePagerFragment(), ImagePagerFragment::class.java.simpleName)
-                    .addToBackStack(null)
-                    .commit()
+                if (view != null && fragmentManager != null){
+                    val transitioningView : ImageView = view.findViewById(R.id.card_image)
+                    fragmentManager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addSharedElement(transitioningView, transitioningView.transitionName)
+                        .replace(R.id.fragment_container, ImagePagerFragment(), ImagePagerFragment::class.java.simpleName)
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
 
         }

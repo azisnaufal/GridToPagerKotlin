@@ -52,7 +52,7 @@ class ImagePagerFragment : Fragment() {
      */
     private fun prepareSharedElementTransition(){
         val transition : Transition = TransitionInflater.from(context)
-            .inflateTransition(R.transition.grid_exit_transition)
+            .inflateTransition(R.transition.image_shared_element_transition)
         sharedElementEnterTransition = transition
 
         // A similar mapping is set at the GridFragment with a setExitSharedElementCallback.
